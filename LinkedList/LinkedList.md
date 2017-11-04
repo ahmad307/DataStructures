@@ -3,7 +3,8 @@
 This is a brief description of the Linked List class, its supported functions and their runtime.
 ----------
 - A Linked List is a linear data structure where its elements are not consecutively organized in the memory, but rather consisting of several nodes connected with each other. Where each element carries a pointer refering to the subsequent element.
-- Object constructor of the class takes one parameter which is the object's data type. (e.g: ```LinkedList <char> myLinkedlist;``` )
+- Object constructor of the class takes one parameter which is the object's data type. 
+(e.g. ```LinkedList <char> myLinkedlist;``` )
 
 ## Functions
 ### push_back:
