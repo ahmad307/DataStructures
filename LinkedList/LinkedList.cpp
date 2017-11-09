@@ -171,6 +171,19 @@ T LinkedList<T>::display_at(int pos)
 	return it->value;
 }
 
+/* Displays all list elements on a single line seperated by spaces */
+template <class T>
+void LinkedList<T>::display_all()
+{
+	Node<T> *it = head;
+
+	for (int i = 0; i < size; i++)
+	{
+		cout << it->value << " ";
+		it = it->next;
+	}
+}
+
 /* Swaps the values of two indices */
 template <class T>
 void LinkedList<T>::swap(int pos1, int pos2)

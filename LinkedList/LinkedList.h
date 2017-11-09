@@ -40,6 +40,7 @@ public:
 	void remove_at(int pos);
 
 	T display_at(int pos);
+	void display_all();
 	void swap(int pos1, int pos2);
 	void make_unique();
 	void undo();
