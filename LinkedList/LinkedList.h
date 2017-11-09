@@ -1,6 +1,7 @@
 #include<iostream>
 #include <algorithm>
 #include <map>
+
 using namespace std;
 
 /* Template classes are used to enable storage of different data types */
@@ -20,6 +21,11 @@ class LinkedList
 	Node<T>* head;
 	Node<T>* tail;
 	int size;
+
+	//Helper Variables for undo function
+	string lastOperation;
+	T lastElement;
+	int lastPos, lastPos2;
 public:
 	LinkedList();
 	~LinkedList();
@@ -36,5 +42,6 @@ public:
 	T display_at(int pos);
 	void swap(int pos1, int pos2);
 	void make_unique();
+	void undo();
 };
 

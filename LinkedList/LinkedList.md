@@ -41,6 +41,10 @@ This is a brief description of the Linked List class, its supported functions an
 - Removes all repeated values in the list, and leaves only one occurance of each.
 - Time Complexity: O(n)
 
+### Undo:
+- Reverses the last operation made on the list (e.g. Reinserts last removed element).
+- Time Complexity: Matches the time complexity of the function to be reversed.
+
 ### display_at:
 - Takes one parameter (index) and returns the value this index node holds.
 - Time Complexity: O(n)

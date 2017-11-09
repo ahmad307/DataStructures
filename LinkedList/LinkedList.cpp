@@ -14,6 +14,11 @@ LinkedList<T>::LinkedList()
 {
 	head = tail = NULL;
 	size = 0;
+
+	//Helper Variables for undo function
+	lastOperation = "";
+	lastElement = NULL;
+	lastPos = lastPos2 = -1;
 }
 
 /* Returns List's Size */
@@ -30,7 +35,7 @@ void LinkedList<T>::push_back(T val)
 {
 	Node<T> *newNode = new Node<T>();
 	newNode->value = val;
-	
+
 	if (size == 0)
 	{
 		head = newNode;
@@ -42,6 +47,10 @@ void LinkedList<T>::push_back(T val)
 	}
 
 	size++;
+
+	//Recording the operation (undo)
+	lastElement = val;
+	lastOperation = "push_back";
 }
 
 template <class T>
@@ -53,6 +62,10 @@ void LinkedList<T>::push_front(T val)
 	head = newNode;
 
 	size++;
+
+	//Recording the operation (undo)
+	lastElement = val;
+	lastOperation = "push_front";
 }
 
 template <class T>
@@ -76,13 +89,21 @@ void LinkedList<T>::insert_at(T val, int pos)
 	it->next = newNode;
 
 	size++;
+
+	//Recording the operation (undo)
+	lastElement = val;
+	lastOperation = "insert_at";
+	lastPos = pos;
 }
 
-/* Deletion Funcitons */
+/* Deletion Functions */
 
 template <class T>
 void LinkedList<T>::pop_back()
 {
+	lastElement = tail->value;
+	lastOperation = "pop_back";
+
 	Node<T> *it = head;
 	for (int i = 1; i < size - 1; i++)
 	{
@@ -99,6 +120,9 @@ void LinkedList<T>::pop_back()
 template <class T>
 void LinkedList<T>::pop_front()
 {
+	lastElement = head->value;
+	lastOperation = "pop_front";
+
 	Node<T> *temp = head;
 	head = head->next;
 	delete temp;
@@ -109,7 +133,7 @@ void LinkedList<T>::pop_front()
 template <class T>
 void LinkedList<T>::remove_at(int pos)
 {
-	if (pos == 0)	
+	if (pos == 0)
 		return pop_front();
 	else if (pos == size - 1)
 		return pop_back();
@@ -121,6 +145,12 @@ void LinkedList<T>::remove_at(int pos)
 	}
 
 	Node<T> *temp = it->next;
+
+	//Recording the operation (undo)
+	lastOperation = "remove_at";
+	lastElement = temp->value;
+	lastPos = pos;
+
 	it->next = it->next->next;
 	delete temp;
 
@@ -145,7 +175,7 @@ T LinkedList<T>::display_at(int pos)
 template <class T>
 void LinkedList<T>::swap(int pos1, int pos2)
 {
-	if (pos1 == pos2)	
+	if (pos1 == pos2)
 		return;
 
 	Node<T> *it = head, *temp;
@@ -166,6 +196,11 @@ void LinkedList<T>::swap(int pos1, int pos2)
 	T tempValue = it->value;
 	it->value = temp->value;
 	temp->value = tempValue;
+
+	//Recording the operation (undo)
+	lastOperation = "swap";
+	lastPos = pos1;
+	lastPos2 = pos2;
 }
 
 /* Removes repeated elements in the list */
@@ -188,7 +223,7 @@ void LinkedList<T>::make_unique()
 
 		it = it->next;
 	}
-	
+
 	int tempSize = size;
 	it = head;
 	for (int i = 0; i < tempSize; i++)
@@ -198,15 +233,40 @@ void LinkedList<T>::make_unique()
 			Node<T>* temp = it->next;
 			it->next = it->next->next;
 
-			if (remove[i+2] == 0)	
+			if (remove[i+2] == 0)
 				i++;
 
 			delete temp;
 			size--;
 		}
-		if (remove[i+1] == 0)	
+		if (remove[i+1] == 0)
 			it = it->next;
 	}
+}
+
+template <class T>
+void LinkedList<T>::undo()
+{
+	if (lastOperation == "push_back")
+		pop_back();
+
+	else if (lastOperation == "push_front")
+		pop_front();
+
+	else if (lastOperation == "pop_front")
+		push_front(lastElement);
+
+	else if (lastOperation == "pop_back")
+		push_back(lastElement);
+
+	else if (lastOperation == "insert_at")
+		remove_at(lastPos);
+
+	else if (lastOperation == "remove_at")
+		insert_at(lastElement, lastPos);
+
+	else if (lastOperation == "swap")
+		swap(lastPos, lastPos2);
 }
 
 /* Deconstructor */

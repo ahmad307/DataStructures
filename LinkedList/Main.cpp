@@ -22,8 +22,11 @@ int main()
 	//Removing repeated elements in the list
 	myLinkedList.make_unique();
 
+	myLinkedList.insert_at(99, 0);
+	myLinkedList.undo();	//Undoing last operation
+
 	cout << "Unique elements in your list:" << endl;
-	for (int i = 0; i < myLinkedList.Length(); i++)	
+	for (int i = 0; i < myLinkedList.Length(); i++)
 	{
 		cout << myLinkedList.display_at(i) << " ";
 	}
