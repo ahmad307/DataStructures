@@ -73,14 +73,12 @@ void LinkedList<T>::insert_at(T val, int pos)
 {
 	if (pos == 0)
 		return push_front(val);
-	else if (pos == size - 1)
-		return push_back(val);
 
 	Node<T> *it = head;
 	Node<T> *newNode = new Node<T>();
 	newNode->value = val;
 
-	for (int i = 1; i < pos; i++)
+	for (int i = 0; i < pos-1; i++)
 	{
 		it = it->next;
 	}
@@ -224,6 +222,7 @@ void LinkedList<T>::make_unique()
 	map <int, int> remove;
 	Node<T> *it = head;
 
+	//Marking existing elements
 	for (int i = 0; i < size; i++)
 	{
 		if (exist[it->value] == 1)
@@ -237,6 +236,7 @@ void LinkedList<T>::make_unique()
 		it = it->next;
 	}
 
+	//Removing repeated elements
 	int tempSize = size;
 	it = head;
 	for (int i = 0; i < tempSize; i++)
