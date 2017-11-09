@@ -1,5 +1,5 @@
 # DataStructures
-My implementation of some of the well-known and commonly used Data Structures (eg BST, LinkedLists).
+My implementation of some of the well-known and commonly used Data Structures (e.g. Binary Search Trees, LinkedLists).
 
 
 Each Data Structure folder contains four files organized as follows:
@@ -10,7 +10,7 @@ Each Data Structure folder contains four files organized as follows:
 
 * [main.cpp]  -  Helper file to test the class.
 
-* [class.txt] -  Text file with detailed description of the class and the supported functions' parameters and Runtime.
+* [class.md] -  Text file with detailed description of the class and the supported functions' parameters and Runtime.
 
 
 Any enhancments suggestions or modificaitions are more than welcomed.
