@@ -103,7 +103,7 @@ void BST<T>::remove(T val)
 	{
 		if (nodeToRemove == root)	//Dealing with root to avoid 'findParent' returning zero
 			root = NULL;
-		else if (parent->bigger->value == val)
+		else if (parent->bigger != NULL && parent->bigger->value == val)
 			parent->bigger = NULL;
 		else 
 			parent->smaller = NULL;
