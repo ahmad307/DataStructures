@@ -1,4 +1,6 @@
 #include <iostream>
+#include <algorithm>
+
 using namespace std;
 
 /* Template classes are used to enable storing different data types */
@@ -25,6 +27,9 @@ public:
 	void insert(T val);
 	void display(Node<T> *currentNode);
 
+	void remove(T val);
+	Node<T> *findParent(T val);
+
 	bool find(T val);
 	int height(Node<T>* node);
 	bool isBalanced(Node<T> *node);
@@ -33,4 +38,3 @@ public:
 	int getLevel(T val);
 	Node<T>* getRoot();
 };
-
