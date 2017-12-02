@@ -116,6 +116,7 @@ void BST<T>::remove(T val)
 		//Dealing with root to avoid 'findParent' returning zero
 		if (nodeToRemove == root)
 		{
+			//Reaching the smallest leaf node in the nodeToRemove right sub-tree
 			it = nodeToRemove->smaller;
 			while (it->smaller != NULL || it->bigger != NULL)
 			{
@@ -147,6 +148,7 @@ void BST<T>::remove(T val)
 		//Dealing with root to avoid 'findParent' returning zero
 		if (nodeToRemove == root)
 		{
+			//Reaching the smallest leaf node in the nodeToRemove right sub-tree
 			it = nodeToRemove->bigger;
 			while (it->smaller != NULL || it->bigger != NULL)
 			{
@@ -180,7 +182,7 @@ void BST<T>::remove(T val)
 
 	/* Removing node if it has 2 children */
 
-	//Reaching smallest node in nodeToRemove right sub-tree
+	//Reaching smallest leaf node in nodeToRemove right sub-tree
 	Node<T> *smallestNode = nodeToRemove->bigger;
 	while (smallestNode->smaller != NULL || smallestNode->bigger != NULL)
 	{
@@ -207,7 +209,7 @@ void BST<T>::remove(T val)
 	nodeToRemove->value = smallestNodeValue;
 }
 
-/* Returns zero if given the root as a parameter*/
+/* Returns zero if given the root as a parameter or the node's parent otherwise */
 template <class T>
 Node<T>* BST<T>::findParent(T val)
 {
@@ -219,9 +221,7 @@ Node<T>* BST<T>::findParent(T val)
 	if (val == root->value)
 		return 0;
 
-
 	Node<T> *it = root;
-
 	while (true)
 	{
 		//Returning current node if one of its children matches the node required
